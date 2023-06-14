@@ -1,0 +1,26 @@
+.mainContainer
+{
+    width:98%;
+    border: 1px solid #A9A9A9;
+    margin: auto;
+    margin-top: 1%;
+    display: flex;
+    justify-content: space-between;
+    background-color: #F5F5F5;
+    align-items: center;
+    padding: 2%;
+}
+.leftdiv{
+ width: 25%;
+ margin: auto;
+ height: 60%;
+ /* border: 1px solid blue; */
+
+}
+.rightdiv{
+
+ width: 68%;
+ margin: auto;
+ /* border: 1px solid palevioletred; */
+
+}

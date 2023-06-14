@@ -1,0 +1,74 @@
+img{
+    width: 100%;
+}
+.ridesContainter
+{
+    width: 80%;
+    margin: auto;
+    /* border: 1px solid black; */
+    /* background-color: #F5F5F5; */
+}
+.ridesdiv
+{
+    display: grid;
+    grid-template-columns: repeat(2,2fr);
+    gap:20px;
+    margin: auto;
+    margin: 2%;
+}
+.divcard{
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: space-between;
+    width:95%;
+    gap:15px;
+}
+.leftcard{
+    width: 45%;
+    margin: auto;
+}
+.leftcard img{
+    width: 100%;
+}
+
+.rightcard{
+    width: 50%;
+    margin: auto;
+}
+
+.safetyContainer
+{
+    width: 80%;
+    margin: auto;
+    /* border: 1px solid black; */
+    /* background-color: #F5F5F5; */
+    margin-top: 2%;
+
+}
+.safetyDiv
+{
+    display: grid;
+    grid-template-columns: repeat(2,2fr);
+    gap:30px;
+    margin: auto;
+    margin: 2%;
+}
+
+.thirdContainer{
+
+    width: 80%;
+    margin: auto;
+    /* border: 1px solid black; */
+    /* background-color: #F5F5F5; */
+    margin-top: 2%;
+
+}
+.thirdsectionDiv{
+
+    display: grid;
+    grid-template-columns: repeat(3,2fr);
+    gap:20px;
+    margin: auto;
+    /* margin: 2%; */
+
+}
