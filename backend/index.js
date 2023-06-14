@@ -1,24 +1,24 @@
 const express = require("express");
-const { connection } = require("./db");
+const app = express();
+const { connection } = require("./db/db");
+const { connection1 } = require("./db");
 const { driverRouter } = require("./routes/driver.routes");
 const { driverPageRouter } = require("./routes/driverPage.routes");
-require("dotenv").config();
-// const cors = require("cors");
-const app = express();
-
-// app.use(cors());
-app.use(express.json());
-
 app.use("/drivers", driverRouter);
 app.use("/driverpage", driverPageRouter);
-
-app.listen(process.env.port, async () => {
-  try {
-    await connection;
-    console.log("Connected to the database");
-    console.log(`Server running on port ${process.env.port}`);
-  } catch (err) {
-    console.error(err);
-    console.log("Something went wrong");
-  }
+require("dotenv").config();
+const {userRouter}=require("./router/user.router")
+const port = process.env.port;
+app.use(express.json());
+app.use("/users",userRouter)
+app.listen(port,async(req,res)=>{
+    try {
+        await connection;
+      await connection1;
+        console.log("db is connected")
+        console.log(`Surver is running at ${port}`)
+    } catch (error) {
+        console.log(error)
+        console.log('there is something wrong with this')
+    }
 });
