@@ -9,7 +9,7 @@ const driverSchema = mongoose.Schema(
     vehicle: { type: String },
     vehicleType: { type: String },
     availability: { type: Boolean, default: false },
-    ratings: [{ type: Number }],
+    ratings: { type: Number },
     reviews: [
       {
         text: { type: String },

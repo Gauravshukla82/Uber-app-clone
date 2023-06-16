@@ -30,19 +30,21 @@ driverPageRouter.get("/", async (req, res) => {
 driverPageRouter.patch("/update/:driverPageID", async (req, res) => {
   //driverId in the driver doc===driverID is the driverPage doc
   const driverIDinDriverDoc = req.body.driverID;
+
   const { driverPageID } = req.params;
+
   try {
     const driverPage = await DriverPageModel.findOne({ _id: driverPageID });
     const driverIDinDriverPageDoc = driverPage.driverID;
     if (driverIDinDriverDoc === driverIDinDriverPageDoc) {
       //update
       await DriverPageModel.findByIdAndUpdate({ _id: driverPageID }, req.body);
-      res.json({ msg: `${driverPage.title} is updated` });
+      res.json({ msg: `${driverPage.bio} is updated` });
     } else {
       res.json({ msg: "Not authorized" });
     }
   } catch (err) {
-    res.json({ error: err });
+    res.json({ error: err.message });
   }
 });
 
