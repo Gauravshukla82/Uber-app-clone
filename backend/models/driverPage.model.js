@@ -12,8 +12,8 @@ const driverPageSchema = mongoose.Schema(
       paymentMethod: { type: String },
       accountNumber: { type: String },
     },
-    user: String,
-    userID: String,
+    driver: String,
+    driverID: String,
   },
   {
     versionKey: false,
