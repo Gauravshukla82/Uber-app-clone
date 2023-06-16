@@ -4,6 +4,7 @@ body {
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif; */
     font-family: 'Noto Sans', sans-serif;
+    overflow-x: hidden;
 /* font-family: 'Roboto', sans-serif;
 font-family: 'Work Sans', sans-serif; */
   /* background-color: #DCDCDC */
