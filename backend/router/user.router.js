@@ -34,7 +34,7 @@ userRouter.post("/login", async (req, res) => {
     if (existedUser) {
       bcrypt.compare(password, existedUser.password, (err, result) => {
         if (result) {
-          const token = jwt.sign({ data: "data" }, process.env.KEY);
+          const token = jwt.sign({ data: "data" }, process.env.secret);
           res.status(200).json({ msg: "You are successfully Logged In!!",token:token });
         } else {
           res.status(400).json({ msg :"You are not authorized"});
@@ -47,6 +47,7 @@ userRouter.post("/login", async (req, res) => {
     res.status(400).json({ error: err.message });
   }
 });
+
 
 module.exports = {
   userRouter,

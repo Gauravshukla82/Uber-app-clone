@@ -3,8 +3,10 @@ const cors = require("cors");
 const app = express();
 const { connection } = require("./db/db");
 const { connection1 } = require("./db");
+require("dotenv").config();
 const { driverRouter } = require("./routes/driver.routes");
 const { driverPageRouter } = require("./routes/driverPage.routes");
+
 app.use(express.json());
 
 app.use(cors());
@@ -15,6 +17,9 @@ const { userRouter } = require("./router/user.router");
 const port = process.env.port;
 
 app.use("/users", userRouter);
+
+app.use(express.json());
+
 app.listen(port, async (req, res) => {
   try {
     await connection;

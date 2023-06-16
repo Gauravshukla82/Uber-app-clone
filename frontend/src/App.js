@@ -1,3 +1,4 @@
+import Footer from "./components/Footer/Footer";
 import Navigation from "./components/Navigation";
 import MainRoutesPage from "./pages/MainRoutesPage";
 
@@ -9,9 +10,10 @@ function App() {
   return (
     <div className="App">
       <Navigation></Navigation>
-      <MainRoutesPage />
-      {/* <h1>Welcome page</h1> */}
-      {/* <RidesbookingPage/> */}
+
+      <MainRoutesPage/>
+      <Footer/>
+
     </div>
   );
 }
