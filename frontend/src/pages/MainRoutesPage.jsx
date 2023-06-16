@@ -6,7 +6,9 @@ import RidesbookingPage from "./RidesbookingPage/RidesbookingPage";
 import HomePage from "./Homepage/HomePage";
 import { Login } from './USERS/Login'
 import { Register } from './USERS/Register'
-import DriverLogin from "../components/driver/DriverLogin";
+import Payment from '../components/Payment/Payment'
+// import DriverLogin from "../components/driver/DriverLogin";
+
 const MainRoutesPage = () => {
   return (
     <div>
@@ -18,7 +20,8 @@ const MainRoutesPage = () => {
         <Route path="/driverlogin" element={<DriverLogin />} />
           <Route path="/login" element={<Login/>}/>
             <Route path="/register" element={<Register/>}/>
-      </Routes>
+            <Route path="/payment" element={<Payment/>}/>
+        </Routes>
 
     </div>
   );
