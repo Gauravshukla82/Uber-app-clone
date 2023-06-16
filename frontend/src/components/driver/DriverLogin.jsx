@@ -45,6 +45,7 @@ const DriverLogin = () => {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            bg="white"
           />
         </FormControl>
         <FormControl id="password" mb={4}>
@@ -53,6 +54,7 @@ const DriverLogin = () => {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            bg="white"
           />
         </FormControl>
         <Button type="submit" colorScheme="blue">
