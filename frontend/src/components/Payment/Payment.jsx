@@ -15,6 +15,8 @@ import {
         AccordionIcon,
         Box,
         Input,
+        Checkbox, CheckboxGroup, Stack,
+        Radio, RadioGroup,
       
   } from '@chakra-ui/react'
 
@@ -79,10 +81,26 @@ import {
       </AccordionButton>
     </h2>
     <AccordionPanel pb={4}>
-    <Input type="text" placeholder='Enter card number' />
+    <RadioGroup >
+  <Stack spacing={5} direction='row'>
+    <Radio colorScheme='green' value='1' color="black">
+    <img src="./images/sbi.png" alt="sbi" style={{width:"80%"}}/>
+    </Radio>
+    <Radio colorScheme='green' value='2'>
+    <img src="./images/axis.png" alt="axis" style={{width:"60%"}}/>
+    </Radio>
+    <Radio colorScheme='green' value='3'>
+    <img src="./images/icic.png" alt="icic" style={{width:"100%"}}/>
+    </Radio>
+    <Radio colorScheme='green' value='4'>
+    <img src="./images/hdfc.png" alt="hdfc" style={{width:"80%"}}/>
+    </Radio>
+  </Stack>
+</RadioGroup>
+    {/* <Input type="text" placeholder='Enter card number' />
     <Input type="date" placeholder='MM/YYYY' />
     <Input type="text" placeholder='Enter username' />
-    <Input type="password" placeholder='CVV' />
+    <Input type="password" placeholder='CVV' /> */}
     </AccordionPanel>
   </AccordionItem>
 
@@ -111,7 +129,12 @@ import {
       </AccordionButton>
     </h2>
     <AccordionPanel pb={4}>
-      cash on delivery
+    <Stack spacing={5} direction='row'>
+  <Checkbox colorScheme='green'>
+    Cash on Delivery
+  </Checkbox>
+</Stack>
+      
     </AccordionPanel>
   </AccordionItem>
 </Accordion>
