@@ -1,4 +1,4 @@
-import { Box, Flex, Text, Link, Center } from "@chakra-ui/react";
+import { Box, Flex, Text, Link } from "@chakra-ui/react";
 
 const DriverPageFooter = () => {
   return (

@@ -19,8 +19,7 @@ import {
   DirectionsRenderer,
 } from "@react-google-maps/api";
 import { useRef, useState } from "react";
-// import Car from "./Car";
-
+import Car from "./Map/Car";
 const center = { lat: 26.8467, lng: 80.9462 };
 
 function Map() {
@@ -107,36 +106,38 @@ function Map() {
         minW="container.md"
         zIndex="1"
       >
-        
-        {ride?<Car style={{zIndex:"1000"}}/>:<HStack spacing={2} justifyContent="space-between">
-          <Box flexGrow={1}>
-            <Autocomplete>
-              <Input type="text" placeholder="Origin" ref={originRef} />
-            </Autocomplete>
-          </Box>
-          <Box flexGrow={1}>
-            <Autocomplete>
-              <Input
-                type="text"
-                placeholder="Destination"
-                ref={destiantionRef}
-              />
-            </Autocomplete>
-          </Box>
+        {ride ? (
+          <Car style={{ zIndex: "1000" }} />
+        ) : (
+          <HStack spacing={2} justifyContent="space-between">
+            <Box flexGrow={1}>
+              <Autocomplete>
+                <Input type="text" placeholder="Origin" ref={originRef} />
+              </Autocomplete>
+            </Box>
+            <Box flexGrow={1}>
+              <Autocomplete>
+                <Input
+                  type="text"
+                  placeholder="Destination"
+                  ref={destiantionRef}
+                />
+              </Autocomplete>
+            </Box>
 
-          <ButtonGroup>
-            
+            <ButtonGroup>
               <Button colorScheme="pink" type="submit" onClick={calculateRoute}>
                 Calculate Route
               </Button>
 
-            <IconButton
-              aria-label="center back"
-              icon={<FaTimes />}
-              onClick={clearRoute}
-            />
-          </ButtonGroup>
-        </HStack>}
+              <IconButton
+                aria-label="center back"
+                icon={<FaTimes />}
+                onClick={clearRoute}
+              />
+            </ButtonGroup>
+          </HStack>
+        )}
         <HStack spacing={4} mt={4} justifyContent="space-between">
           <Text>Distance: {distance} </Text>
           <Text>Duration: {duration} </Text>
