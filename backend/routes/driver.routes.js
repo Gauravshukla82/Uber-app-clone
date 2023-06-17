@@ -5,14 +5,45 @@ const { DriverModel } = require("../models/driver.model");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
+driverRouter.get("/", async (req, res) => {
+  try {
+    const drivers = await DriverModel.find();
+    res.status(200).json(drivers);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch drivers" });
+  }
+});
+
 driverRouter.post("/register", async (req, res) => {
-  const { name, email, pass } = req.body;
+  const {
+    name,
+    email,
+    pass,
+    contact,
+    location,
+    vehicle,
+    vehicleType,
+    availability,
+    ratings,
+    reviews,
+  } = req.body;
   try {
     bcrypt.hash(pass, 5, async (err, hash) => {
       if (err) {
         res.json({ error: err.message });
       } else {
-        const driver = new DriverModel({ name, email, pass: hash });
+        const driver = new DriverModel({
+          name,
+          email,
+          contact,
+          location,
+          vehicle,
+          vehicleType,
+          availability,
+          ratings,
+          reviews,
+          pass: hash,
+        });
         await driver.save();
         res.json({ msg: "Driver has been registered", driver: req.body });
       }
