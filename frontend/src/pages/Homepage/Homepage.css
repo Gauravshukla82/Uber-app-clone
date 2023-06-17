@@ -5,8 +5,6 @@ img{
 {
     width: 80%;
     margin: auto;
-    /* border: 1px solid black; */
-    /* background-color: #F5F5F5; */
 }
 .ridesdiv
 {
@@ -69,9 +67,144 @@ h4{
 .thirdsectionDiv{
 
     display: grid;
-    grid-template-columns: repeat(3,2fr);
+    grid-template-columns: repeat(3,1fr);
     gap:20px;
     margin: auto;
     /* margin: 2%; */
 
 }
+
+
+@media screen and (min-width: 512px) and (max-width:1024px) {
+
+    .ridesContainter
+{
+    width: 90%;
+    margin: auto;
+}
+.ridesdiv
+{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap:20px;
+    margin: auto;
+    margin: 2%;
+}
+.divcard{
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width:95%;
+    gap:15px;
+}
+
+.safetyContainer
+{
+    width: 93%;
+    margin: auto;
+    /* border: 1px solid black; */
+    /* background-color: #F5F5F5; */
+    margin-top: 3%;
+
+}
+h4{
+    margin:2%;
+}
+.safetyDiv
+{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap:30px;
+    margin: auto;
+    margin: 2%;
+}
+
+.thirdContainer{
+
+    width: 90%;
+    margin: auto;
+    /* border: 1px solid black; */
+    /* background-color: #F5F5F5; */
+    margin-top: 2%;
+
+}
+.thirdsectionDiv{
+
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap:20px;
+    margin: auto;
+    /* margin: 2%; */
+
+}
+
+  }
+  
+  @media screen and (min-width: 300px) and (max-width:511px) {
+
+    
+    .ridesContainter
+{
+    width: 90%;
+    margin: auto;
+}
+.ridesdiv
+{
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
+    gap:20px;
+    margin: auto;
+    margin: 2%;
+}
+.divcard{
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width:95%;
+    gap:15px;
+}
+
+.safetyContainer
+{
+    width: 95%;
+    margin: auto;
+    /* border: 1px solid black; */
+    /* background-color: #F5F5F5; */
+    margin-top: 3%;
+
+}
+h4{
+    margin:2%;
+}
+.safetyDiv
+{
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
+    gap:30px;
+    margin: auto;
+    margin: 2%;
+}
+
+.thirdContainer{
+
+    width: 93%;
+    margin: auto;
+    /* border: 1px solid black; */
+    /* background-color: #F5F5F5; */
+    margin-top: 2%;
+
+}
+.thirdsectionDiv{
+
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
+    gap:20px;
+    margin: auto;
+    /* margin: 2%; */
+
+}
+  
+    
+  }
