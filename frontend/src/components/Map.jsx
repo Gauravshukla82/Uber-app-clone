@@ -19,7 +19,6 @@ import {
   DirectionsRenderer,
 } from "@react-google-maps/api";
 import { useRef, useState } from "react";
-// import Car from "./Car";
 
 const center = { lat: 26.8467, lng: 80.9462 };
 
