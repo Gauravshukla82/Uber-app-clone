@@ -9,6 +9,7 @@ import {
   Input,
   Image,
 } from "@chakra-ui/react";
+import DriverDetails from "./DriverDetails";
 
 const DriverDashboard = () => {
   const [driverData, setDriverData] = useState([]);
@@ -77,6 +78,7 @@ const DriverDashboard = () => {
       <Heading size="lg" mb={4}>
         Driver Dashboard
       </Heading>
+      <DriverDetails />
       {driverData.length > 0 ? (
         driverData.map((driver) => (
           <Box key={driver._id} mb={6}>
