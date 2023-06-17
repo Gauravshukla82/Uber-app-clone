@@ -25,7 +25,7 @@ const center = { lat: 26.8467, lng: 80.9462 };
 
 function Map() {
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
+    googleMapsApiKey: "AIzaSyCelkvj4fMod8CkhjPDQegdfuL72QEvzK8",
     libraries: ["places"],
   });
 
@@ -38,21 +38,21 @@ function Map() {
   /** @type React.MutableRefObject<HTMLInputElement> */
   const originRef = useRef();
   /** @type React.MutableRefObject<HTMLInputElement> */
-  const destiantionRef = useRef();
+  const destinationRef = useRef();
 
   if (!isLoaded) {
     return <SkeletonText />;
   }
 
   async function calculateRoute() {
-    if (originRef.current.value === "" || destiantionRef.current.value === "") {
+    if (originRef.current.value === "" || destinationRef.current.value === "") {
       return;
     }
     // eslint-disable-next-line no-undef
     const directionsService = new google.maps.DirectionsService();
     const results = await directionsService.route({
       origin: originRef.current.value,
-      destination: destiantionRef.current.value,
+      destination: destinationRef.current.value,
       // eslint-disable-next-line no-undef
       travelMode: google.maps.TravelMode.DRIVING,
     });
@@ -67,7 +67,7 @@ function Map() {
     setDistance("");
     setDuration("");
     originRef.current.value = "";
-    destiantionRef.current.value = "";
+    destinationRef.current.value = "";
   }
 
   return (
@@ -108,7 +108,7 @@ function Map() {
         zIndex="1"
       >
         
-        {ride?<Car style={{zIndex:"1000"}}/>:<HStack spacing={2} justifyContent="space-between">
+        <HStack spacing={2} justifyContent="space-between">
           <Box flexGrow={1}>
             <Autocomplete>
               <Input type="text" placeholder="Origin" ref={originRef} />
@@ -119,7 +119,7 @@ function Map() {
               <Input
                 type="text"
                 placeholder="Destination"
-                ref={destiantionRef}
+                ref={destinationRef}
               />
             </Autocomplete>
           </Box>
@@ -136,7 +136,7 @@ function Map() {
               onClick={clearRoute}
             />
           </ButtonGroup>
-        </HStack>}
+        </HStack>
         <HStack spacing={4} mt={4} justifyContent="space-between">
           <Text>Distance: {distance} </Text>
           <Text>Duration: {duration} </Text>

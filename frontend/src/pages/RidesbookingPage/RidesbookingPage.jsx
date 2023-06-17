@@ -15,8 +15,6 @@ const RidesbookingPage = () => {
       <div className='rightdiv'>
       <Map/>
       </div>
-      
-      
     </div>
     </>
   )

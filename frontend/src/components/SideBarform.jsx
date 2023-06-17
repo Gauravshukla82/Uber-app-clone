@@ -26,7 +26,7 @@ const SideBarform = () => {
         <br />
         <br />
         <button onClick={handleRide} className='button'>Search For Cars</button>
-          {ride?<Car />:null}
+        {ride?<Car />:null}
 
         </form>
     </div>
