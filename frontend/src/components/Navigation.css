@@ -1,0 +1,12 @@
+.logoimage img{
+width: 45%;
+}
+
+@media screen and (min-width: 300px) and (max-width:1024px) {
+    .logoimage{
+        width: 40%;
+    }
+    .logoimage img{
+        width: 100%;
+    }
+}

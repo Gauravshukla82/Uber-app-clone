@@ -1,17 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Button,
-  Center,
   Flex,
   FormControl,
   Heading,
   Input,
   Stack,
+  Text,
 } from "@chakra-ui/react";
-import { EmailIcon, LockIcon, SmallAddIcon } from "@chakra-ui/icons";
-
+import { Link as ReactRouterLink } from "react-router-dom";
+// import { Link as ChakraLink } from "@chakra-ui/react";
+import axios from "axios";
+const initState = {
+  name: "",
+  email: "",
+  password: "",
+};
 export const Register = () => {
+  const [user, setUser] = useState(initState);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUser((pre) => {
+      return {
+        ...pre,
+        [name]: value,
+      };
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post(`http://localhost:8000/users/register`, user)
+      .then((res) => {
+        console.log(res);
+        setUser(initState);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const { name, email, password } = user;
   return (
     <Flex minHeight="100vh" align="center" justify="center" bg="gray.100">
       <Box bg="white" p={8} rounded="md" shadow="md" maxWidth="400px" w="100%">
@@ -19,48 +50,48 @@ export const Register = () => {
           Register
         </Heading>
         <Stack spacing={4}>
-          <FormControl id="name" isRequired>
-            <Input type="text" placeholder="Enter your name" />
+          <FormControl isRequired>
+            <Input
+              type="text"
+              placeholder="Enter your name"
+              name="name"
+              value={name}
+              onChange={handleChange}
+            />
           </FormControl>
-          <FormControl id="email" isRequired>
-            <Input type="email" placeholder="Enter your email" />
+          <FormControl isRequired>
+            <Input
+              type="email"
+              placeholder="Enter your email"
+              name="email"
+              value={email}
+              onChange={handleChange}
+            />
           </FormControl>
-          <FormControl id="password" isRequired>
-            <Input type="password" placeholder="Enter your password" />
+          <FormControl isRequired>
+            <Input
+              type="password"
+              placeholder="Enter your password"
+              name="password"
+              value={password}
+              onChange={handleChange}
+            />
           </FormControl>
-          <Button colorScheme="blue" size="lg" width="100%">
+          <Button
+            onClick={handleSubmit}
+            colorScheme="blue"
+            size="lg"
+            width="100%"
+          >
             Register
           </Button>
+          <Text textAlign="center" fontSize="sm">
+            Already logged in?{" "}
+            <ReactRouterLink to="/register">
+              log in
+            </ReactRouterLink>
+          </Text>
         </Stack>
-        <Center my={4}>Or register with:</Center>
-        <Flex justify="center" direction="column" gap="10px">
-          <Button
-            aria-label="Continue with Gmail"
-            icon={<EmailIcon />}
-            colorScheme="red"
-            variant="outline"
-            mr={2}
-          >
-            Continue with Gmail
-          </Button>
-          <Button
-            aria-label="Register with Facebook"
-            icon={<LockIcon />}
-            colorScheme="blue"
-            variant="outline"
-            mr={2}
-          >
-            Continue with Facebook
-          </Button>
-          <Button
-            aria-label="Register with Twitter"
-            icon={<SmallAddIcon />}
-            colorScheme="teal"
-            variant="outline"
-          >
-            Continue with Twitter
-          </Button>
-        </Flex>
       </Box>
     </Flex>
   );
