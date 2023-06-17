@@ -81,18 +81,22 @@ const DriverSignup = () => {
 
   return (
     <>
-      <Center fontSize={50} bg="grey" mt="5" color="black">
-        Driver Registration
+      <Center fontSize={45} mt="5" color="#212529" fontWeight={"bold"}>
+        Apply to drive with Savari
       </Center>
       <HStack margin={30} gap={20}>
         <Box>
           <Image src="https://images.ctfassets.net/q8mvene1wzq4/2U9CYHaJUPoUS5s00qjNh8/5bdbdacc2ad1ddd640896a2ab89339fb/dvr_hero_pp.jpg?w=1000&q=60&fm=webp" />
         </Box>
         <Box margin="auto" width={"50%"}>
+          <Center fontSize={35} mt="5" color="#212529" fontWeight={"bold"}>
+            Register Yourself
+          </Center>
           <Grid
             templateColumns="repeat(2, 1fr)"
             gap={4}
-            bg={"gray.200"}
+            color={"white"}
+            bg={"#212529"}
             p={"15px"}
             borderRadius={"5%"}
           >
@@ -103,6 +107,8 @@ const DriverSignup = () => {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 borderColor={"black"}
+                bg="white"
+                placeholder="Enter Name"
               />
             </FormControl>
 
@@ -113,6 +119,8 @@ const DriverSignup = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 borderColor={"black"}
+                bg="white"
+                placeholder="Enter Email"
               />
             </FormControl>
 
@@ -123,6 +131,8 @@ const DriverSignup = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 borderColor={"black"}
+                bg="white"
+                placeholder="Enter password"
               />
             </FormControl>
 
@@ -133,6 +143,8 @@ const DriverSignup = () => {
                 value={contact}
                 onChange={(e) => setContact(e.target.value)}
                 borderColor={"black"}
+                bg="white"
+                placeholder="Enter contact details"
               />
             </FormControl>
 
@@ -143,6 +155,8 @@ const DriverSignup = () => {
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
                 borderColor={"black"}
+                bg="white"
+                placeholder="Enter Your Location"
               />
             </FormControl>
 
@@ -153,6 +167,8 @@ const DriverSignup = () => {
                 value={vehicle}
                 onChange={(e) => setVehicle(e.target.value)}
                 borderColor={"black"}
+                bg="white"
+                placeholder="Enter Vehicle Name"
               />
             </FormControl>
 
@@ -163,6 +179,8 @@ const DriverSignup = () => {
                 value={vehicleType}
                 onChange={(e) => setVehicleType(e.target.value)}
                 borderColor={"black"}
+                bg="white"
+                placeholder="Enter Vehicle Type like sudan,mini"
               />
             </FormControl>
 
@@ -171,17 +189,23 @@ const DriverSignup = () => {
                 isChecked={availability}
                 onChange={(e) => setAvailability(e.target.checked)}
                 borderColor={"black"}
+                color="white"
               >
                 Available for service
               </Checkbox>
             </FormControl>
           </Grid>
-          <Button colorScheme="teal" onClick={handleSignup}>
-            Sign up
-          </Button>
-          <h4>
-            Already Have Account ?<Button colorScheme="teal">Login</Button>
-          </h4>
+          <HStack>
+            <Button bg="#212529" color={"white"} onClick={handleSignup}>
+              Sign up
+            </Button>
+            <h4>
+              Already Have Account ?
+              <Button bg="#212529" color={"white"}>
+                Login
+              </Button>
+            </h4>
+          </HStack>
         </Box>
       </HStack>
       <DriverPageFooter />
