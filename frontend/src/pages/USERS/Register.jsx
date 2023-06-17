@@ -9,7 +9,7 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import { Link as ReactRouterLink } from "react-router-dom";
+import { Link as ReactRouterLink, useNavigate } from "react-router-dom";
 // import { Link as ChakraLink } from "@chakra-ui/react";
 import axios from "axios";
 const initState = {
@@ -19,6 +19,7 @@ const initState = {
 };
 export const Register = () => {
   const [user, setUser] = useState(initState);
+  const navigate=useNavigate()
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUser((pre) => {
@@ -35,6 +36,7 @@ export const Register = () => {
       .post(`http://localhost:8000/users/register`, user)
       .then((res) => {
         console.log(res);
+        navigate("/login")
         setUser(initState);
       })
       .catch((err) => {
@@ -87,7 +89,7 @@ export const Register = () => {
           </Button>
           <Text textAlign="center" fontSize="sm">
             Already logged in?{" "}
-            <ReactRouterLink to="/register">
+            <ReactRouterLink to="/login">
               log in
             </ReactRouterLink>
           </Text>

@@ -1,8 +1,10 @@
 const express = require("express");
 const userRouter = express.Router();
 const jwt = require("jsonwebtoken");
+const { logout } = require("../logout");
 const bcrypt = require("bcrypt");
 require("dotenv").config();
+const { userAuth } = require("../middleware/user.middleware");
 const { UserModel } = require("../model/user.model");
 // registration
 const cors = require("cors");
@@ -56,6 +58,18 @@ userRouter.post("/login", async (req, res) => {
     }
   } catch (err) {
     res.status(400).json({ error: err.message });
+  }
+});
+
+userRouter.use(userAuth);
+
+userRouter.get("/logout", async (req, res) => {
+  try {
+    let token = req.headers.authorization?.split(" ")[1];
+    logout.push(token);
+    res.send("Plese login");
+  } catch (error) {
+    res.status(400).json({ msg: error.message });
   }
 });
 

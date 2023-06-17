@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import {useNavigate} from 'react-router-dom'
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   Button,
@@ -10,16 +10,20 @@ import {
   Flex,
   Text,
 } from "@chakra-ui/react";
+
 import { Link as ReactRouterLink } from "react-router-dom";
 import { Link as ChakraLink } from "@chakra-ui/react";
 import axios from "axios";
+import { AppContext } from "./AuthContext"
+
 const initState = {
   email: "",
   password: "",
 };
 export const Login = () => {
   const [user, setUser] = useState(initState);
-  const navigate=useNavigate()
+  const navigate = useNavigate();
+  const { setIsAuth } = useContext(AppContext);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUser((pre) => {
@@ -36,7 +40,8 @@ export const Login = () => {
       .post(`http://localhost:8000/users/login`, user)
       .then((res) => {
         console.log(res);
-        navigate("/")
+        setIsAuth(true);
+        navigate("/");
         setUser(initState);
       })
       .catch((err) => {
@@ -107,8 +112,8 @@ export const Login = () => {
           </Button>
           <Text textAlign="center" fontSize="sm">
             Already logged in?{" "}
-            <ChakraLink as={ReactRouterLink} to="/login">
-             signup
+            <ChakraLink as={ReactRouterLink} to="/register">
+              signup
             </ChakraLink>
           </Text>
         </Flex>

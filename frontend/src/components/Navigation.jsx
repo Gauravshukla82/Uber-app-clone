@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import {Link} from "react-router-dom"
 // import 'bootstrap/dist/css/bootstrap.min.css';  
 import {Nav, Navbar, Container, NavDropdown, Image} from 'react-bootstrap';  
 import ProfileImage from './ProfileImage/ProfileImage';
 import "./Navigation.css"
+import { AppContext } from '../pages/USERS/AuthContext';
+import { Logout } from '../pages/USERS/Logout';
 // bg="dark" variant="dark" color="white"
 const Navigation = () => {
+  const {isAuth}=useContext(AppContext)
   return (
 
     <>  
@@ -20,6 +23,9 @@ const Navigation = () => {
               <Nav.Link href="/eat" color="light">UberEat</Nav.Link>
               <Nav.Link href="/driver">Driver</Nav.Link> 
               <Nav.Link href="/buisness">Buisness</Nav.Link> 
+              {
+isAuth ? <Logout/> : ""
+              }
               {/* <Nav.Link href="/beauty">Beauty</Nav.Link>  
               <Nav.Link href="/about">About</Nav.Link> 
               <Nav.Link href="/contact">Contact</Nav.Link> 
