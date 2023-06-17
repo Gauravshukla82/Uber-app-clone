@@ -10,12 +10,10 @@ import {
   Checkbox,
   Grid,
   useToast,
-  background,
   HStack,
   Image,
   Center,
 } from "@chakra-ui/react";
-import { color } from "framer-motion";
 
 const DriverSignup = () => {
   const [name, setName] = useState("");
@@ -81,10 +79,14 @@ const DriverSignup = () => {
 
   return (
     <>
-      <Center fontSize={45} mt="5" color="#212529" fontWeight={"bold"}>
-        Apply to drive with Savari
+      <Center fontSize={45} mt="2" color="#212529" fontWeight={"bold"}>
+        Apply to drive with Savari{" "}
+        <Image
+          w="100px"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQg0iyKahA50q4EIeuUd6KxtfaynHmUpS-Qg&usqp=CAU"
+        />
       </Center>
-      <HStack margin={30} gap={20}>
+      <HStack margin="5px" gap={20}>
         <Box>
           <Image src="https://images.ctfassets.net/q8mvene1wzq4/2U9CYHaJUPoUS5s00qjNh8/5bdbdacc2ad1ddd640896a2ab89339fb/dvr_hero_pp.jpg?w=1000&q=60&fm=webp" />
         </Box>
@@ -188,8 +190,9 @@ const DriverSignup = () => {
               <Checkbox
                 isChecked={availability}
                 onChange={(e) => setAvailability(e.target.checked)}
-                borderColor={"black"}
+                borderColor={"white"}
                 color="white"
+                mt={12}
               >
                 Available for service
               </Checkbox>
