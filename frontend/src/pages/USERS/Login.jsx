@@ -36,14 +36,16 @@ export const Login = () => {
     axios
       .post(`https://dull-erin-iguana-belt.cyclic.app/users/login`, user)
       .then((res) => {
-        console.log(res);
+        console.log(res.data.email);
+        console.log(res.data.name);
+        localStorage.setItem('username', JSON.stringify(res.data.name))
         navigate("/")
         setUser(initState);
       })
       .catch((err) => {
         console.log(err);
       });
-      localStorage.setItem("emaill", JSON.stringify(user) );
+      localStorage.setItem("email", JSON.stringify(user) );
   };
 
   const { email, password } = user;
