@@ -1,3 +1,5 @@
+import axios from "axios"
+
 const data = [
     {
       id: "123",
@@ -20,9 +22,29 @@ const data = [
   ];
   
 const Car = () => {
-  const handleClick = (e) => {
-    e.preventDefault();
+  
+
+    const userde = async()=>{
+      try {
+        let res =await axios.get("http://localhost:8000/users/login");
+        let data= res.data
+        console.log(data); 
+      } catch (error) {
+        console.log(error);
+      }
     }
+
+
+
+  const handleClick = (el,e) => {
+    e.preventDefault()
+    userde();
+   console.log(el.multiplier*100);
+
+   
+    }
+  
+   
     return (
       <div>
         <h5 style={{marginTop:"30px"}}>Select the Ride</h5>
@@ -37,7 +59,7 @@ const Car = () => {
               </div>
               <p style={{ margin: "auto" }}>₹ {el.multiplier * 100}</p>
               <button
-                onClick={handleClick}
+                onClick={(e)=>handleClick(el,e)}
                 style={{
                   height: "50px",
                   margin: "auto",

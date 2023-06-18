@@ -46,7 +46,7 @@ userRouter.post("/login", async (req, res) => {
           const token = jwt.sign({ data: "data" }, process.env.secret);
           res
             .status(200)
-            .json({ msg: "You are successfully Logged In!!", token: token });
+            .json({ msg: "You are successfully Logged In!!", token: token, email:email });
         } else {
           res.status(400).json({ msg: "You are not authorized" });
         }
@@ -58,6 +58,22 @@ userRouter.post("/login", async (req, res) => {
     res.status(400).json({ error: err.message });
   }
 });
+
+
+// we ll need a get users detials route too  
+//tp 
+userRouter.get("/userdetails", async (req, res) => {
+  try {
+    const users = await UserModel.find();
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch users" });
+  }
+});
+
+
+
+
 
 module.exports = {
   userRouter,
