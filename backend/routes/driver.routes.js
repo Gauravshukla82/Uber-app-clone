@@ -4,6 +4,7 @@ const driverRouter = express.Router();
 const { DriverModel } = require("../models/driver.model");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
+const { auth } = require("../middleware/auth.middleware");
 
 driverRouter.get("/", async (req, res) => {
   try {
@@ -45,7 +46,12 @@ driverRouter.post("/register", async (req, res) => {
           pass: hash,
         });
         await driver.save();
-        res.json({ msg: "Driver has been registered", driver: req.body });
+        const token = jwt.sign({ driverID: driver._id }, process.env.secret);
+        res.json({
+          msg: "Driver has been registered",
+          driver: req.body,
+          token,
+        });
       }
     });
   } catch (error) {
@@ -66,14 +72,14 @@ driverRouter.post("/login", async (req, res) => {
           );
           res.json({ msg: "logged In", token });
         } else {
-          res.json({ error: "wrong credentials" });
+          res.status(400).json({ error: "wrong credentials" });
         }
       });
     } else {
-      res.json({ error: "driver does not exist" });
+      res.status(400).json({ error: "driver does not exist" });
     }
   } catch (err) {
-    res.json({ error: err.message });
+    res.status(400).json({ error: err.message });
   }
 });
 
@@ -96,9 +102,21 @@ driverRouter.delete("/delete/:userID", async (req, res) => {
     await DriverModel.findByIdAndDelete({ _id: userID });
     res
       .status(200)
-      .json({ msg: "the user has been deleted", deletedUser: deletedUser });
+      .json({ msg: "the driver has been deleted", deletedUser: deletedUser });
   } catch (error) {
-    res.status.json({ msg: err.message });
+    res.status(400).json({ msg: err.message });
+  }
+});
+
+driverRouter.get("/dashboard", auth, async (req, res) => {
+  try {
+    const driver = await DriverModel.findById(req.body.driverID);
+    if (!driver) {
+      return res.status(404).json({ error: "Driver not found" });
+    }
+    res.json({ driver });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 });
 

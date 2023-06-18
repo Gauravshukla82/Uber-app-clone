@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Box,
   FormControl,
@@ -11,11 +11,42 @@ import {
   Center,
   Image,
 } from "@chakra-ui/react";
+const baseURL = "https://dull-erin-iguana-belt.cyclic.app";
+// import DriverDashboard from "./DriverDashboard";
 
 const DriverLogin = () => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
+  const [driverData, setDriverData] = useState(null); // State to store driver data
   const toast = useToast();
+
+  useEffect(() => {
+    // Fetch driver data when the component mounts
+    fetchDriverData();
+  }, []);
+
+  const fetchDriverData = () => {
+    // Fetch driver data from the server
+    fetch(`${baseURL}/drivers/dashboard`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`, // Pass the token in the authorization header
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setDriverData(data.driver);
+      })
+      .catch((err) => {
+        console.log(err);
+        toast({
+          title: "Error",
+          description: "Failed to fetch driver data",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      });
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -24,7 +55,7 @@ const DriverLogin = () => {
       pass,
     };
     console.log(payload);
-    fetch("http://localhost:8000/drivers/login", {
+    fetch(`${baseURL}/drivers/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -48,6 +79,7 @@ const DriverLogin = () => {
           duration: 3000,
           isClosable: true,
         });
+        fetchDriverData(); // Fetch driver data again after login
       })
       .catch((err) => {
         console.log(err);

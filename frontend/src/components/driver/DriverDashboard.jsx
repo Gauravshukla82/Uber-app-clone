@@ -1,153 +1,171 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Heading,
   Text,
-  Button,
-  FormControl,
-  FormLabel,
-  Input,
+  useToast,
+  Center,
   Image,
+  Flex,
+  Grid,
+  VStack,
 } from "@chakra-ui/react";
-import DriverDetails from "./DriverDetails";
+
+import DriverPageFooter from "./DriverPageFooter";
+const baseURL = "https://dull-erin-iguana-belt.cyclic.app";
 
 const DriverDashboard = () => {
-  const [driverData, setDriverData] = useState([]);
+  const [driverData, setDriverData] = useState(null); // State to store driver data
+  const toast = useToast();
 
   useEffect(() => {
-    // Fetch driver data from the backend
-    fetch("http://localhost:8000/driverpage", {
-      method: "GET",
+    // Fetch driver data when the component mounts
+    fetchDriverData();
+  }, []);
+
+  const fetchDriverData = () => {
+    // Fetch driver data from the server
+    fetch(`${baseURL}/drivers/dashboard`, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        Authorization: `Bearer ${localStorage.getItem("token")}`, // Pass the token in the authorization header
       },
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        setDriverData(data);
+        setDriverData(data.driver);
       })
-      .catch((err) => console.log(err));
-  }, []);
-
-  const handleEdit = (driverId) => {
-    // Find the driver data to edit based on the driverId
-    const driverToEdit = driverData.find((driver) => driver._id === driverId);
-    // Implement the edit functionality
-    // Set the edited driver data back to the state
-    setDriverData((prevDriverData) =>
-      prevDriverData.map((driver) => {
-        if (driver._id === driverId) {
-          return { ...driver, ...driverToEdit };
-        }
-        return driver;
-      })
-    );
-  };
-
-  const handleSave = (driverId) => {
-    // Find the driver data to save based on the driverId
-    const driverToSave = driverData.find((driver) => driver._id === driverId);
-    // Implement the save functionality
-    // Update the driver data on the backend
-    fetch(`http://localhost:8000/driverpage/${driverId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-      body: JSON.stringify(driverToSave),
-    })
-      .then((res) => res.json())
-      .then((updatedDriver) => {
-        // Update the driver data in the state with the saved changes
-        setDriverData((prevDriverData) =>
-          prevDriverData.map((driver) => {
-            if (driver._id === driverId) {
-              return updatedDriver;
-            }
-            return driver;
-          })
-        );
-      })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        toast({
+          title: "Error",
+          description: "Failed to fetch driver data",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      });
   };
 
   return (
-    <Box maxW="md" mx="auto" p={4}>
-      <Heading size="lg" mb={4}>
-        Driver Dashboard
-      </Heading>
-      <DriverDetails />
-      {driverData.length > 0 ? (
-        driverData.map((driver) => (
-          <Box key={driver._id} mb={6}>
-            <Text fontWeight="bold">Bio:</Text>
-            <Text>{driver.bio}</Text>
-            <Text fontWeight="bold" mt={4}>
-              Profile Picture:
+    <>
+      <Center fontSize={45} mt="2" color="#212529" fontWeight={"bold"}>
+        {driverData ? (
+          <>
+            <Text>
+              Welcome <span>{driverData.name}</span> To Your Dashboard
             </Text>
-            <Image src={driver.profilePicture} />
-            {driver.socialMediaLinks && (
-              <>
-                <Text fontWeight="bold" mt={4}>
-                  Social Media Links:
-                </Text>
-                <Text>
-                  Facebook:{" "}
-                  <a href={driver.socialMediaLinks.facebook}>
-                    {driver.socialMediaLinks.facebook}
-                  </a>
-                </Text>
-                <Text>
-                  Twitter:{" "}
-                  <a href={driver.socialMediaLinks.twitter}>
-                    {driver.socialMediaLinks.twitter}
-                  </a>
-                </Text>
-                <Text>
-                  Instagram:{" "}
-                  <a href={driver.socialMediaLinks.instagram}>
-                    {driver.socialMediaLinks.instagram}
-                  </a>
-                </Text>
-              </>
-            )}
-            {driver.paymentSettings && (
-              <>
-                <Text fontWeight="bold" mt={4}>
-                  Payment Settings:
-                </Text>
-                <Text>
-                  Payment Method: {driver.paymentSettings.paymentMethod}
-                </Text>
-                <Text>
-                  Account Number: {driver.paymentSettings.accountNumber}
-                </Text>
-              </>
-            )}
-            <Button
-              colorScheme="blue"
-              size="sm"
-              onClick={() => handleEdit(driver._id)}
-              mt={4}
-            >
-              Edit Account Details
-            </Button>
-            <Button
-              colorScheme="green"
-              size="sm"
-              onClick={() => handleSave(driver._id)}
-              mt={2}
-            >
-              Save Account Details
-            </Button>
-          </Box>
-        ))
-      ) : (
-        <Text>Loading driver data...</Text>
-      )}
-    </Box>
+            <Image
+              w="100px"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQg0iyKahA50q4EIeuUd6KxtfaynHmUpS-Qg&usqp=CAU"
+            />
+          </>
+        ) : (
+          <h4>Login</h4>
+        )}
+      </Center>
+      <Box margin="auto" width="100%" display={{ md: "flex" }} gap={15} m={6}>
+        <Box
+          p={4}
+          color="white"
+          bg="#212529"
+          flex="25%"
+          minW={{ md: "400px" }}
+          display={{ md: "flex" }}
+          flexDirection={{ md: "column" }}
+          textAlign={"center"}
+        >
+          <Heading size="lg" mb={4}>
+            Driver Information
+          </Heading>
+          {driverData ? (
+            <VStack align="left" spacing={2}>
+              <Heading fontWeight="bold" size="md">
+                {driverData.name}
+              </Heading>
+              <Text>Email Address: {driverData.email}</Text>
+              <Text>Mobile Number: {driverData.contact}</Text>
+              <Text>Vehicle: {driverData.vehicle}</Text>
+              <Text>Vehicle Type: {driverData.vehicleType}</Text>
+              <Text>
+                Availability:{" "}
+                {driverData.availability ? (
+                  <Text color="green">Available</Text>
+                ) : (
+                  <Text color="red">Not Available</Text>
+                )}
+              </Text>
+              <Text>Overall Rating: {driverData.ratings}</Text>
+            </VStack>
+          ) : (
+            <Text>No driver data available</Text>
+          )}
+        </Box>
+        <Box
+          flex="65%"
+          backgroundImage={
+            "https://www.researchgate.net/publication/323759986/figure/fig3/AS:631576123682823@1527590890164/Map-in-Uber-application-tracking-user-in-a-Yellow-Cab.png"
+          }
+        >
+          <Heading bg="green.200" size="md">
+            driver trips will show here and he can accept or reject
+          </Heading>
+        </Box>
+      </Box>
+      <Heading textAlign={"center"}>
+        There's an Savari ride for everyone
+      </Heading>
+      <Grid
+        templateColumns={{
+          base: "1fr", // 1 column on small screens
+          sm: "repeat(2, 1fr)", // 2 columns on medium screens
+          md: "repeat(3, 1fr)", // 3 columns on large screens
+        }}
+        gap={6}
+        m={6}
+      >
+        <Box>
+          <Image src="https://s3-ap-southeast-1.amazonaws.com/ola-prod-website/ride-budget.svg" />
+          <Heading size="md">For any budget</Heading>
+          <Heading size="sm">
+            From Bikes and Autos to Prime Sedans and Prime SUVs, you will find a
+            ride in your budget at your convenience any time.
+          </Heading>
+        </Box>
+        <Box>
+          <Image src="https://s3-ap-southeast-1.amazonaws.com/ola-prod-website/ride-distance.svg" />
+          <Heading size="md">For any distance</Heading>
+          <Heading size="sm">
+            Book rides within the city with Daily, or take a trip to your
+            favourite destinations outside the city with Outstation.
+          </Heading>
+        </Box>
+        <Box>
+          <Image src="https://s3-ap-southeast-1.amazonaws.com/ola-prod-website/ride-duration.svg" />
+          <Heading size="md">For any duration</Heading>
+          <Heading size="sm">
+            Easily plan a day out without having to worry about conveyance with
+            an hour-based package from Rental.
+          </Heading>
+        </Box>
+      </Grid>
+      <Box m={6}>
+        <Heading mb={4} color="blue.400" textAlign={"center"}>
+          Make every day payday
+        </Heading>
+        <Image
+          borderRadius={5}
+          src="https://images.ctfassets.net/q8mvene1wzq4/14j1VooOckKD3p29hMHlaz/55206618a33b79c121968f9e8eb68ab8/dvr_pgr_pp.jpg"
+        />
+        <Heading mt={5}>We have your back</Heading>
+        <Text mt={5} mb={5}>
+          When you drive with Lyft, you're part of a community that prioritizes
+          safety on the road. We have tools in the app for you to get help
+          easily, if you ever need it. And we’re looking out for your well-being
+          before, during, and after every ride.
+        </Text>
+      </Box>
+      <DriverPageFooter />
+    </>
   );
 };
 

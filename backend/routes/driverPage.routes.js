@@ -10,7 +10,10 @@ driverPageRouter.post("/add", async (req, res) => {
   try {
     const driverPage = new DriverPageModel(req.body);
     await driverPage.save();
-    res.json({ msg: "New Driverpage data has beed added", note: req.body });
+    res.json({
+      msg: "New Driverpage additional data has beed added",
+      note: req.body,
+    });
   } catch (err) {
     res.json({ error: err.message });
   }
