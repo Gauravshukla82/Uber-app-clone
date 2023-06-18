@@ -1,5 +1,5 @@
 import React from 'react'
-import SideBarform from '../../components/SideBarform'
+// import SideBarform from '../../components/SideBarform'
 import Map from '../../components/Map'
 import "./RidesbookingPage.css"
 
@@ -9,7 +9,7 @@ const RidesbookingPage = () => {
     <div className='mainContainer'>
 
       <div className='leftdiv'>
-      <SideBarform/>
+      {/* <SideBarform/> */}
       </div>
 
       <div className='rightdiv'>
