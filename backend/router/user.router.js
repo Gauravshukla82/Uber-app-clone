@@ -69,26 +69,15 @@ userRouter.post("/login", async (req, res) => {
 
 // we ll need a get users detials route too  
 //tp 
-// userRouter.get("/userdetails", async (req, res) => {
-//   try {
-//     const users = await UserModel.find();
-//     res.status(200).json(users);
-//   } catch (error) {
-//     res.status(400).json({ error: "Failed to fetch users" });
-//   }
-// });
-
-userRouter.get("/userdetails", auth, async (req, res) => {
+userRouter.get("/userdetails", async (req, res) => {
   try {
-    const driver = await DriverModel.findById(req.body.driverID);
-    if (!driver) {
-      return res.status(404).json({ error: "Driver not found" });
-    }
-    res.json({ driver });
+    const users = await UserModel.find();
+    res.status(200).json(users);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(400).json({ error: "Failed to fetch users" });
   }
 });
+
 
 
 
