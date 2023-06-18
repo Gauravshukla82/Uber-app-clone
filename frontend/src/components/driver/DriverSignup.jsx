@@ -1,5 +1,6 @@
 import { useState } from "react";
 import DriverPageFooter from "./DriverPageFooter";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import {
   FormControl,
@@ -14,6 +15,7 @@ import {
   Image,
   Center,
 } from "@chakra-ui/react";
+const baseURL = "https://dull-erin-iguana-belt.cyclic.app";
 
 const DriverSignup = () => {
   const [name, setName] = useState("");
@@ -30,19 +32,16 @@ const DriverSignup = () => {
     // You can use the state values to send a signup request to the backend
     // Example: axios.post('/api/driver/register', { name, email, password, contact, location, vehicle, vehicleType, availability })
     try {
-      const response = await axios.post(
-        "http://localhost:8000/drivers/register",
-        {
-          name,
-          email,
-          pass: password,
-          contact,
-          location,
-          vehicle,
-          vehicleType,
-          availability,
-        }
-      );
+      const response = await axios.post(`${baseURL}/drivers/register`, {
+        name,
+        email,
+        pass: password,
+        contact,
+        location,
+        vehicle,
+        vehicleType,
+        availability,
+      });
 
       if (response.status === 200) {
         console.log("Driver has been registered");
@@ -109,7 +108,7 @@ const DriverSignup = () => {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 borderColor={"black"}
-                bg="white"
+                bg="grey"
                 placeholder="Enter Name"
               />
             </FormControl>
@@ -121,7 +120,7 @@ const DriverSignup = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 borderColor={"black"}
-                bg="white"
+                bg="grey"
                 placeholder="Enter Email"
               />
             </FormControl>
@@ -133,7 +132,7 @@ const DriverSignup = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 borderColor={"black"}
-                bg="white"
+                bg="grey"
                 placeholder="Enter password"
               />
             </FormControl>
@@ -145,7 +144,7 @@ const DriverSignup = () => {
                 value={contact}
                 onChange={(e) => setContact(e.target.value)}
                 borderColor={"black"}
-                bg="white"
+                bg="grey"
                 placeholder="Enter contact details"
               />
             </FormControl>
@@ -157,7 +156,7 @@ const DriverSignup = () => {
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
                 borderColor={"black"}
-                bg="white"
+                bg="grey"
                 placeholder="Enter Your Location"
               />
             </FormControl>
@@ -169,7 +168,7 @@ const DriverSignup = () => {
                 value={vehicle}
                 onChange={(e) => setVehicle(e.target.value)}
                 borderColor={"black"}
-                bg="white"
+                bg="grey"
                 placeholder="Enter Vehicle Name"
               />
             </FormControl>
@@ -181,7 +180,7 @@ const DriverSignup = () => {
                 value={vehicleType}
                 onChange={(e) => setVehicleType(e.target.value)}
                 borderColor={"black"}
-                bg="white"
+                bg="grey"
                 placeholder="Enter Vehicle Type like sudan,mini"
               />
             </FormControl>
@@ -191,7 +190,7 @@ const DriverSignup = () => {
                 isChecked={availability}
                 onChange={(e) => setAvailability(e.target.checked)}
                 borderColor={"white"}
-                color="white"
+                bg="grey"
                 mt={12}
               >
                 Available for service
@@ -203,10 +202,7 @@ const DriverSignup = () => {
               Sign up
             </Button>
             <h4>
-              Already Have Account ?
-              <Button bg="#212529" color={"white"}>
-                Login
-              </Button>
+              Already Have Account ?<Link to="/driverlogin">login</Link>
             </h4>
           </HStack>
         </Box>
