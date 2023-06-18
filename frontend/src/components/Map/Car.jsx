@@ -24,21 +24,14 @@ const data = [
 const Car = () => {
   
 
-    const userde = async()=>{
-      try {
-        let res =await axios.get("http://localhost:8000/users/login");
-        let data= res.data
-        console.log(data); 
-      } catch (error) {
-        console.log(error);
-      }
-    }
+    
 
 
 
   const handleClick = (el,e) => {
     e.preventDefault()
-    userde();
+    let userar= JSON.parse(localStorage.getItem("emaill")) || null 
+    console.log(userar);
    console.log(el.multiplier*100);
 
    
