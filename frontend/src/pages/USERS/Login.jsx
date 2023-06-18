@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {useNavigate} from 'react-router-dom'
+import {json, useNavigate} from 'react-router-dom'
 import {
   Box,
   Button,
@@ -16,6 +16,7 @@ import axios from "axios";
 const initState = {
   email: "",
   password: "",
+  name:"" 
 };
 export const Login = () => {
   const [user, setUser] = useState(initState);
@@ -33,15 +34,22 @@ export const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(`http://localhost:8000/users/login`, user)
+      .post(`https://dull-erin-iguana-belt.cyclic.app/users/login`, user)
       .then((res) => {
-        console.log(res);
+        console.log(res.data.email);
+        console.log(res.data.name);
+        localStorage.setItem('username', JSON.stringify(res.data.name))
+        alert("login successfull")
         navigate("/")
+        
         setUser(initState);
+
       })
       .catch((err) => {
         console.log(err);
+        alert("invalid crediantials")
       });
+      localStorage.setItem("email", JSON.stringify(user) );
   };
 
   const { email, password } = user;
@@ -107,7 +115,7 @@ export const Login = () => {
           </Button>
           <Text textAlign="center" fontSize="sm">
             Already logged in?{" "}
-            <ChakraLink as={ReactRouterLink} to="/login">
+            <ChakraLink as={ReactRouterLink} to="/register">
              signup
             </ChakraLink>
           </Text>

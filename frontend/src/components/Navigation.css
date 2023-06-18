@@ -2,7 +2,15 @@
 width: 45%;
 }
 
-@media screen and (min-width: 300px) and (max-width:1024px) {
+@media screen and (min-width: 512px) and (max-width:1024px) {
+    .logoimage{
+        width: 18%;
+    }
+    .logoimage img{
+        width: 100%;
+    }
+}
+@media screen and (min-width: 300px) and (max-width:511px) {
     .logoimage{
         width: 40%;
     }

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate} from 'react-router-dom'
 import {
   Box,
   Button,
@@ -19,6 +20,7 @@ const initState = {
 };
 export const Register = () => {
   const [user, setUser] = useState(initState);
+  const navigate=useNavigate()
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUser((pre) => {
@@ -32,13 +34,16 @@ export const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(`http://localhost:8000/users/register`, user)
+      .post(`https://dull-erin-iguana-belt.cyclic.app/users/register`, user)
       .then((res) => {
         console.log(res);
         setUser(initState);
+        alert("successfully registered")
+        navigate("/login")
       })
       .catch((err) => {
         console.log(err);
+        alert("already user is registered")
       });
   };
 
@@ -87,9 +92,10 @@ export const Register = () => {
           </Button>
           <Text textAlign="center" fontSize="sm">
             Already logged in?{" "}
-            <ReactRouterLink to="/register">
+            <ReactRouterLink to="/login">
               log in
             </ReactRouterLink>
+           
           </Text>
         </Stack>
       </Box>
