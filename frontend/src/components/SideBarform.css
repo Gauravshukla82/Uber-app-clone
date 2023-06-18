@@ -6,11 +6,12 @@
 }
 
 input{
-    width: 350px;
+    width: 100%;
     border: 1px solid black;
     background-color:#D3D3D3;
     padding: 8px;
     margin-top:8px;
+    margin: auto;
 }
 
 .button{
@@ -21,4 +22,30 @@ input{
     display: block;
     margin: auto;
     text-align: center;
+    cursor: pointer;
 } 
+
+@media screen and (min-width: 512px) and (max-width:1024px) {
+
+    input{
+        width: 100%;
+        border: 1px solid black;
+        background-color:#D3D3D3;
+        padding: 8px;
+        margin-top:8px;
+        margin: auto;
+    }
+
+}
+@media screen and (min-width: 300px) and (max-width:511px) {
+
+    input{
+        width: 100%;
+        border: 1px solid black;
+        background-color:#D3D3D3;
+        padding: 8px;
+        margin-top:8px;
+        margin: auto;
+    }
+
+}

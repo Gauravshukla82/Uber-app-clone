@@ -1,21 +1,9 @@
 
-import React from "react";
-import { Link } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import {
-  Nav,
-  Navbar,
-  Container,
-  NavDropdown,
-  Image
-  
-} from "react-bootstrap";
-import ProfileImage from "./ProfileImage/ProfileImage";
+
 
 import React from 'react'
 import {Link} from "react-router-dom"
 import "./Navigation.css"
-// import 'bootstrap/dist/css/bootstrap.min.css';  
 import {Nav, Navbar, Container, NavDropdown, Image} from 'react-bootstrap';  
 import ProfileImage from './ProfileImage/ProfileImage';
 
@@ -23,35 +11,6 @@ import ProfileImage from './ProfileImage/ProfileImage';
 const Navigation = () => {
   
   return (
-
-    <>
-      <Navbar
-        collapseOnSelect
-        expand="lg"
-        bg="dark"
-        variant="dark"
-        color="white"
-      >
-        <Container>
-          <Navbar.Brand href="/">
-            <img src="./images/result.png" alt="logo" className="logo"></img>
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="me-auto">
-              <Nav.Link href="/" color="white">
-                Home
-              </Nav.Link>
-              <Nav.Link href="/ride" color="white">
-                Ride
-              </Nav.Link>
-              <Nav.Link href="/eat" color="light">
-                UberEat
-              </Nav.Link>
-              <Nav.Link href="/driver">Driver</Nav.Link>
-              <Nav.Link href="/buisness">Buisness</Nav.Link>
-              
-
 
     <>  
       <Navbar collapseOnSelect expand="lg"  bg="dark" variant="dark" color="white">  
