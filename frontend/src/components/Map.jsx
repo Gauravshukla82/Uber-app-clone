@@ -10,7 +10,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { FaLocationArrow, FaTimes } from "react-icons/fa";
-
+import "./Map.css";
 import {
   useJsApiLoader,
   GoogleMap,
@@ -19,6 +19,7 @@ import {
   DirectionsRenderer,
 } from "@react-google-maps/api";
 import { useRef, useState } from "react";
+import Car from "./Map/Car"
 
 const center = { lat: 26.8467, lng: 80.9462 };
 
@@ -43,7 +44,8 @@ function Map() {
     return <SkeletonText />;
   }
 
-  async function calculateRoute() {
+  async function calculateRoute(e) {
+    e.preventDefault();
     if (originRef.current.value === "" || destinationRef.current.value === "") {
       return;
     }
@@ -76,6 +78,7 @@ function Map() {
       alignItems="center"
       h="70vh"
       w="65vw"
+      border="1px solid"
     >
       <Box position="absolute" left={0} top={0} h="100%" w="100%">
         {/* Google Map Box */}
@@ -99,15 +102,39 @@ function Map() {
       </Box>
       <Box
         p={4}
+        position="absolute"
+        left={-460}
+        top={0}
         borderRadius="lg"
         m={4}
         bgColor="white"
         shadow="base"
-        minW="container.md"
+        minW="400"
         zIndex="1"
       >
-        
-        <HStack spacing={2} justifyContent="space-between">
+        <div className="formdiv">
+          <h2>Request Ride Now</h2>
+          <form action="">
+            <br />
+            <label htmlFor="currnt location">Location</label>
+            <br />
+            <Autocomplete>
+              <input type="text" placeholder="enter  location" ref={originRef}/>
+            </Autocomplete>
+            <br />
+            <br />
+            <label htmlFor="destination">Destination</label>
+            <br />
+            <Autocomplete>
+              <input type="text" placeholder="enter destination" ref={destinationRef}/>
+            </Autocomplete>
+            <br />
+            <br />
+            <button className="button" type="submit" onClick={calculateRoute}>Search For Cars</button>
+            {ride ? <Car /> : null}
+          </form>
+        </div>
+        {/* <HStack spacing={2} justifyContent="space-between">
           <Box flexGrow={1}>
             <Autocomplete>
               <Input type="text" placeholder="Origin" ref={originRef} />
@@ -135,7 +162,7 @@ function Map() {
               onClick={clearRoute}
             />
           </ButtonGroup>
-        </HStack>
+        </HStack> */}
         <HStack spacing={4} mt={4} justifyContent="space-between">
           <Text>Distance: {distance} </Text>
           <Text>Duration: {duration} </Text>
