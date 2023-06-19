@@ -33,7 +33,7 @@ export const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(`http://localhost:8000/users/login`, user)
+      .post(`https://dull-erin-iguana-belt.cyclic.app/users/login`, user)
       .then((res) => {
         console.log(res);
         navigate("/")

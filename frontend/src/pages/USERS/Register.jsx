@@ -32,7 +32,7 @@ export const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(`http://localhost:8000/users/register`, user)
+      .post(`https://dull-erin-iguana-belt.cyclic.app/users/register`, user)
       .then((res) => {
         console.log(res);
         setUser(initState);
