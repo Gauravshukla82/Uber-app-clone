@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {useNavigate} from 'react-router-dom'
+import {json, useNavigate} from 'react-router-dom'
 import {
   Box,
   Button,
@@ -36,7 +36,6 @@ export const Login = () => {
     axios
       .post(`https://dull-erin-iguana-belt.cyclic.app/users/login`, user)
       .then((res) => {
-        console.log(res);
         navigate("/")
         setUser(initState);
       })
