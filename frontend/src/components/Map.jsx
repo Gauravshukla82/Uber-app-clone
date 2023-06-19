@@ -19,7 +19,7 @@ import {
   DirectionsRenderer,
 } from "@react-google-maps/api";
 import { useRef, useState } from "react";
-import Car from "./Map/Car"
+import Car from "./Map/Car";
 
 const center = { lat: 26.8467, lng: 80.9462 };
 
@@ -34,6 +34,8 @@ function Map() {
   const [distance, setDistance] = useState("");
   const [duration, setDuration] = useState("");
   const [ride, setRide] = useState(false);
+  const [origin, setOrigin] = useState("")
+  const [destination, setDestination] = useState("")
 
   /** @type React.MutableRefObject<HTMLInputElement> */
   const originRef = useRef();
@@ -47,7 +49,7 @@ function Map() {
   async function calculateRoute(e) {
     e.preventDefault();
     if (originRef.current.value === "" || destinationRef.current.value === "") {
-      return;
+      return ; 
     }
     // eslint-disable-next-line no-undef
     const directionsService = new google.maps.DirectionsService();
@@ -70,6 +72,13 @@ function Map() {
     originRef.current.value = "";
     destinationRef.current.value = "";
   }
+  const handleOriginInput = (e) => {
+    setOrigin(e.target.value);
+    setDestination(e.target.value);
+  }
+  const handleDestinationInput = (e) => {
+    setDestination(e.target.value);
+  }
 
   return (
     <Flex
@@ -86,12 +95,12 @@ function Map() {
           center={center}
           zoom={15}
           mapContainerStyle={{ width: "100%", height: "100%" }}
-          options={{
-            zoomControl: false,
-            streetViewControl: false,
-            mapTypeControl: false,
-            fullscreenControl: false,
-          }}
+          // options={{
+          //   zoomControl: false,
+          //   streetViewControl: false,
+          //   mapTypeControl: false,
+          //   fullscreenControl: false,
+          // }}
           onLoad={(map) => setMap(map)}
         >
           <Marker position={center} />
@@ -104,7 +113,7 @@ function Map() {
         p={4}
         position="absolute"
         left={-460}
-        top={0}
+        top={-25}
         borderRadius="lg"
         m={4}
         bgColor="white"
@@ -116,22 +125,44 @@ function Map() {
           <h2>Request Ride Now</h2>
           <form action="">
             <br />
-            <label htmlFor="currnt location">Location</label>
+            <b>
+              <label htmlFor="currnt location">Origin</label>
+            </b>
             <br />
             <Autocomplete>
-              <input type="text" placeholder="enter  location" ref={originRef}/>
+              <b>
+                <input type="text" placeholder="From" ref={originRef} onChange={handleOriginInput}/>
+              </b>
             </Autocomplete>
-            <br />
             <br />
             <label htmlFor="destination">Destination</label>
             <br />
             <Autocomplete>
-              <input type="text" placeholder="enter destination" ref={destinationRef}/>
+              <input
+                type="text"
+                placeholder="Where To ?"
+                ref={destinationRef}
+                onChange={handleDestinationInput}
+              />
             </Autocomplete>
             <br />
             <br />
-            <button className="button" type="submit" onClick={calculateRoute}>Search For Cars</button>
-            {ride ? <Car /> : null}
+            <ButtonGroup>
+            
+            <Button color="white" bg="#000" type="submit" onClick={calculateRoute}>
+              Calculate Route
+            </Button>
+
+          <IconButton
+            aria-label="center back"
+            icon={<FaTimes />}
+            onClick={clearRoute}
+          />
+        </ButtonGroup>
+            {/* <button className="button" type="submit" onClick={calculateRoute}>
+              Search For Cars
+            </button> */}
+            {ride ? <Car distance={distance} origin={origin} destination={destination} /> : null}
           </form>
         </div>
         {/* <HStack spacing={2} justifyContent="space-between">
