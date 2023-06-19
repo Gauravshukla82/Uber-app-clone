@@ -11,6 +11,7 @@ import {
   Center,
   Image,
 } from "@chakra-ui/react";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 const baseURL = "https://dull-erin-iguana-belt.cyclic.app";
 // import DriverDashboard from "./DriverDashboard";
 
@@ -19,6 +20,7 @@ const DriverLogin = () => {
   const [pass, setPass] = useState("");
   const [driverData, setDriverData] = useState(null); // State to store driver data
   const toast = useToast();
+  const navigate = useNavigate()
 
   useEffect(() => {
     // Fetch driver data when the component mounts
@@ -72,6 +74,7 @@ const DriverLogin = () => {
       .then((res) => {
         console.log(res);
         localStorage.setItem("token", res.token);
+        navigate("/driverdashboard")
         toast({
           title: "Login Successful",
           description: "You have successfully logged in",
@@ -129,12 +132,13 @@ const DriverLogin = () => {
               bg="white"
             />
           </FormControl>
+          
           <Button type="submit" colorScheme="blue">
             Sign In
           </Button>
         </form>
         <Text mt={4}>
-          Don't have an account? <a href="/driver">Sign Up</a>
+          Don't have an account? <Link to="/driver"><Button colorScheme="blue">Sign Up</Button></Link>
         </Text>
       </Box>
     </>

@@ -9,6 +9,7 @@ import {
   Flex,
   Grid,
   VStack,
+  Button,
 } from "@chakra-ui/react";
 
 import DriverPageFooter from "./DriverPageFooter";
@@ -16,7 +17,10 @@ const baseURL = "https://dull-erin-iguana-belt.cyclic.app";
 
 const DriverDashboard = () => {
   const [driverData, setDriverData] = useState(null); // State to store driver data
+  const [accept, setAccept] = useState(false);
+  const [reject, setReject] = useState(false);
   const toast = useToast();
+  const userData = JSON.parse(localStorage.getItem("userDetails"));
 
   useEffect(() => {
     // Fetch driver data when the component mounts
@@ -44,6 +48,14 @@ const DriverDashboard = () => {
           isClosable: true,
         });
       });
+  };
+
+  const handleAccept = () => {
+    setAccept(!accept);
+  };
+  const handleReject = () => {
+    setReject(!reject);
+    localStorage.removeItem("userDetails")
   };
 
   return (
@@ -109,6 +121,21 @@ const DriverDashboard = () => {
           <Heading bg="green.200" size="md">
             driver trips will show here and he can accept or reject
           </Heading>
+          {reject ? null : (
+            <Box>
+              <Text>Name : {userData?.userName}</Text>
+              <Text>Email : {userData?.userEmail}</Text>
+              <Text>Origin Location : {userData?.origin}</Text>
+              <Text>Destination Location : {userData?.destination}</Text>
+              <Text>Fare : {Math.ceil(userData?.distanceNumber * userData?.mul)}</Text>
+              <Button colorScheme="green" onClick={handleAccept}>
+                {accept ? "User is waiting" : "Accept"}
+              </Button>
+              {accept?null:<Button colorScheme="red" onClick={handleReject}>
+                Reject
+              </Button>}
+            </Box>
+          )}
         </Box>
       </Box>
       <Heading textAlign={"center"}>

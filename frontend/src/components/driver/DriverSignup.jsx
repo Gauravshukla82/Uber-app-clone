@@ -14,6 +14,8 @@ import {
   HStack,
   Image,
   Center,
+  Text,
+  Spacer
 } from "@chakra-ui/react";
 const baseURL = "https://dull-erin-iguana-belt.cyclic.app";
 
@@ -99,7 +101,7 @@ const DriverSignup = () => {
             color={"white"}
             bg={"#212529"}
             p={"15px"}
-            borderRadius={"5%"}
+            borderRadius={"10px"}
           >
             <FormControl marginBottom="4">
               <FormLabel>Name</FormLabel>
@@ -197,13 +199,19 @@ const DriverSignup = () => {
               </Checkbox>
             </FormControl>
           </Grid>
-          <HStack>
-            <Button bg="#212529" color={"white"} onClick={handleSignup}>
-              Sign up
+          <HStack display="flex" justifyContent="space-evenly" >
+            <Button bg="#000" color={"white"} onClick={handleSignup}>
+              Sign Up
             </Button>
-            <h4>
-              Already Have Account ?<Link to="/driverlogin">login</Link>
-            </h4>
+            <Text mt="4">
+              Already Have Account ? 
+              <Link to="/driverlogin">
+              
+                <Button ml="4" color="white" bg="#000">
+                  Sign In
+                </Button>
+              </Link>
+            </Text>
           </HStack>
         </Box>
       </HStack>

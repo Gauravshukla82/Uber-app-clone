@@ -61,6 +61,7 @@ export const Login = () => {
       justifyContent="center"
       bg="gray.100"
     >
+      
       <Box bg="white" p={8} rounded="md" shadow="md" maxWidth="400px" w="100%">
         <Heading as="h1" size="xl" mb={4}>
           <Center>Login</Center>
