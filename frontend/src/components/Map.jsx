@@ -9,6 +9,7 @@ import {
   SkeletonText,
   Text,
 } from "@chakra-ui/react";
+import { useToast } from "@chakra-ui/react";
 import { FaLocationArrow, FaTimes } from "react-icons/fa";
 import "./Map.css";
 import {
@@ -34,8 +35,9 @@ function Map() {
   const [distance, setDistance] = useState("");
   const [duration, setDuration] = useState("");
   const [ride, setRide] = useState(false);
-  const [origin, setOrigin] = useState("")
-  const [destination, setDestination] = useState("")
+  const [origin, setOrigin] = useState("");
+  const [destination, setDestination] = useState("");
+  const toast = useToast();
 
   /** @type React.MutableRefObject<HTMLInputElement> */
   const originRef = useRef();
@@ -49,7 +51,7 @@ function Map() {
   async function calculateRoute(e) {
     e.preventDefault();
     if (originRef.current.value === "" || destinationRef.current.value === "") {
-      return ; 
+      return;
     }
     // eslint-disable-next-line no-undef
     const directionsService = new google.maps.DirectionsService();
@@ -75,11 +77,21 @@ function Map() {
   const handleOriginInput = (e) => {
     setOrigin(e.target.value);
     setDestination(e.target.value);
-  }
+  };
   const handleDestinationInput = (e) => {
     setDestination(e.target.value);
-  }
-
+  };
+  const handleDriverArrival = () => {
+    // Show toast notification
+    toast({
+      title: "Driver Arrival",
+      description: "The driver will reach you in 5 minutes.",
+      status: "info",
+      duration: 10000,
+      position: "top-left",
+      isClosable: true,
+    });
+  };
   return (
     <Flex
       position="relative"
@@ -131,7 +143,12 @@ function Map() {
             <br />
             <Autocomplete>
               <b>
-                <input type="text" placeholder="From" ref={originRef} onChange={handleOriginInput}/>
+                <input
+                  type="text"
+                  placeholder="From"
+                  ref={originRef}
+                  onChange={handleOriginInput}
+                />
               </b>
             </Autocomplete>
             <br />
@@ -148,21 +165,31 @@ function Map() {
             <br />
             <br />
             <ButtonGroup>
-            
-            <Button color="white" bg="#000" type="submit" onClick={calculateRoute}>
-              Calculate Route
-            </Button>
+              <Button
+                color="white"
+                bg="#000"
+                type="submit"
+                onClick={calculateRoute}
+              >
+                Calculate Route
+              </Button>
 
-          <IconButton
-            aria-label="center back"
-            icon={<FaTimes />}
-            onClick={clearRoute}
-          />
-        </ButtonGroup>
+              <IconButton
+                aria-label="center back"
+                icon={<FaTimes />}
+                onClick={clearRoute}
+              />
+            </ButtonGroup>
             {/* <button className="button" type="submit" onClick={calculateRoute}>
               Search For Cars
             </button> */}
-            {ride ? <Car distance={distance} origin={origin} destination={destination} /> : null}
+            {ride ? (
+              <Car
+                distance={distance}
+                origin={origin}
+                destination={destination}
+              />
+            ) : null}
           </form>
         </div>
         {/* <HStack spacing={2} justifyContent="space-between">
@@ -206,6 +233,7 @@ function Map() {
               map.setZoom(15);
             }}
           />
+          <button onClick={handleDriverArrival}>Notify Driver Arrival</button>
         </HStack>
       </Box>
     </Flex>
