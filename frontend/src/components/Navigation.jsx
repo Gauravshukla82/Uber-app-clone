@@ -2,15 +2,18 @@
 
 
 import React, { useEffect, useState } from 'react'
-import {Link} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 import {Nav, Navbar, Container, NavDropdown, Image} from 'react-bootstrap';  
 import ProfileImage from './ProfileImage/ProfileImage';
 import "./Navigation.css"
+import FetchData from './FetchData';
 // bg="dark" variant="dark" color="white"
+// import {useNavigate} from "react-router-dom"
+
 const Navigation = () => {
 
   const [name,setname]=useState("")
-
+  // const nevigate = useNavigate()
   // let name = JSON.parse(localStorage.getItem("username"))
   // console.log(name)
   // setname(username)
@@ -18,10 +21,17 @@ const Navigation = () => {
   useEffect(()=>{
 
     
-  let username = JSON.parse(localStorage.getItem("username"))
-  console.log(username)
-  setname(username)
-  },[])
+      // window.location.reload(false);
+      let username = JSON.parse(localStorage.getItem("username"))
+    console.log(username)
+    setname(username)
+    
+
+  },[name])
+  
+   
+  
+  
 
   return (
 
@@ -51,7 +61,7 @@ const Navigation = () => {
           </Navbar.Collapse>  
 
           <Nav>  
-              <Nav.Link href="">{name}</Nav.Link>   
+              <Nav.Link href=""><FetchData name={name}/></Nav.Link>   
 
               {/* <NavDropdown title={name} id="profile-dropdown">
             <NavDropdown.Item href="#profile">View Profile</NavDropdown.Item>
