@@ -17,19 +17,22 @@ const Navigation = () => {
   // let name = JSON.parse(localStorage.getItem("username"))
   // console.log(name)
   // setname(username)
-
+let username;
   useEffect(()=>{
 
     
       // window.location.reload(false);
-      let username = JSON.parse(localStorage.getItem("username"))
+    username = JSON.parse(localStorage.getItem("username"))
     console.log(username)
     setname(username)
     
 
   },[name])
   
-   
+  
+   const handleLogout = () =>{
+      localStorage.removeItem("username")
+   }
   
   
 
@@ -61,7 +64,10 @@ const Navigation = () => {
           </Navbar.Collapse>  
 
           <Nav>  
-              <Nav.Link href=""><FetchData name={name}/></Nav.Link>   
+            
+              <Nav.Link href=""><FetchData name={name}/></Nav.Link>
+            
+              {/* <Nav.Link href=""><FetchData name={name}/></Nav.Link>    */}
 
               {/* <NavDropdown title={name} id="profile-dropdown">
             <NavDropdown.Item href="#profile">View Profile</NavDropdown.Item>
@@ -71,7 +77,10 @@ const Navigation = () => {
           </NavDropdown> */}
             </Nav>
             <Nav>
-            <Nav.Link href="/login">Login</Nav.Link>   
+              {
+                name ? <Nav.Link href="/" onClick={handleLogout}>Logout</Nav.Link>:<Nav.Link href="/login">Login</Nav.Link>
+              }
+            {/* <Nav.Link href="/login">Login</Nav.Link>    */}
 
             </Nav>
         </Container>  
