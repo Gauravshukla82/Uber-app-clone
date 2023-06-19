@@ -36,17 +36,18 @@ export const Login = () => {
     axios
       .post(`https://dull-erin-iguana-belt.cyclic.app/users/login`, user)
       .then((res) => {
-<<<<<<< HEAD
-=======
         console.log(res.data.email);
         console.log(res.data.name);
         localStorage.setItem('username', JSON.stringify(res.data.name))
->>>>>>> 74d12e734fac9b545564eec6773847173ecb73d0
+        alert("login successfull")
         navigate("/")
+        
         setUser(initState);
+
       })
       .catch((err) => {
         console.log(err);
+        alert("invalid crediantials")
       });
       localStorage.setItem("email", JSON.stringify(user) );
   };
@@ -114,7 +115,7 @@ export const Login = () => {
           </Button>
           <Text textAlign="center" fontSize="sm">
             Already logged in?{" "}
-            <ChakraLink as={ReactRouterLink} to="/login">
+            <ChakraLink as={ReactRouterLink} to="/register">
              signup
             </ChakraLink>
           </Text>
