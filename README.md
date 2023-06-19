@@ -1,7 +1,21 @@
 # ambiguous-oven-8467
 
 
-https://savari.netlify.app/ is a clone of popular app uber.com. It is a platform where you can where you can book the cab/ride.
+https://savari.netlify.app/ is a clone of popular app uber.com. It is a platform where you can book the cab/ride from any location all over the world.
+
+Tech Stacks Used:
+. React Js
+. Express Js
+. Node JS
+. MongoDb
+. Mongoose
+. Chakra UI
+. Material UI
+. CSS
+. React Google Map
+. Google Cloud Console
+. Cyclic
+. Netlify
 
 Following are various pages of this website:-
 1. Landing Page : https://magnamen.netlify.app/
