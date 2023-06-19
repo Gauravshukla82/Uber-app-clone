@@ -6,14 +6,17 @@ const { connection1 } = require("./db");
 const { driverRouter } = require("./routes/driver.routes");
 const { driverPageRouter } = require("./routes/driverPage.routes");
 const { userRouter } = require("./router/user.router");
+
+
 const port = process.env.port;
 app.use(cors());
 app.use(express.json());
 app.use("/drivers", driverRouter);
 app.use("/driverpage", driverPageRouter);
 app.use("/users", userRouter);
+
 require("dotenv").config();
-const port = process.env.port;
+// const port = process.env.port;
 app.listen(port, async (req, res) => {
   try {
     await connected;

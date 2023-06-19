@@ -1,3 +1,5 @@
+import axios from "axios"
+
 const data = [
     {
       id: "123",
@@ -13,27 +15,44 @@ const data = [
     },
     {
       id: "789",
-      title: "Uber Luxary",
+      title: "Uber Luxury",
       multiplier: 1.7,
       image: "https://links.papareact.com/7pf"
     }
   ];
   
-  const Car = () => {
+const Car = () => {
+  
+
+    
+
+
+
+  const handleClick = (el,e) => {
+    e.preventDefault()
+    let userar= JSON.parse(localStorage.getItem("emaill")) || null 
+    console.log(userar);
+   console.log(el.multiplier*100);
+
+   
+    }
+  
+   
     return (
       <div>
-        <h1>Select the Ride</h1>
+        <h5 style={{marginTop:"30px"}}>Select the Ride</h5>
         {data?.map((el) => {
           return (
-            <div style={{ display: "flex", margin: "auto" }} key={el.id}>
-              <img src={el.image} style={{ width: "150px" }} alt="" />
+            <div style={{ display: "flex", marginTop: "20px" }} key={el.id}>
+              <img src={el.image} style={{ width: "70px" }} alt="" />
               <div>
-                <h3>{el.title}</h3>
-                <p>Time Travel:</p>
-                <p>Distance:</p>
+                <h6 style={{marginBottom:"2px"}}>{el.title}</h6>
+                <p style={{marginBottom:"2px"}}>Time Travel:</p>
+                <p style={{marginBottom:"2px"}}>Distance:</p>
               </div>
-              <h3 style={{ margin: "auto" }}>₹ {el.multiplier * 100}</h3>
+              <p style={{ margin: "auto" }}>₹ {el.multiplier * 100}</p>
               <button
+                onClick={(e)=>handleClick(el,e)}
                 style={{
                   height: "50px",
                   margin: "auto",

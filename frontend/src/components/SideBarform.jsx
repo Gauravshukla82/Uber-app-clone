@@ -1,6 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./SideBarform.css"
+import Car from './Map/Car';
 const SideBarform = () => {
+  const [ride, setRide] = useState(false);
+  
+  const handleRide=(e) => {
+    e.preventDefault();
+    setRide(!ride);
+  }
+  
   return (
     <>
     <div className='formdiv'>
@@ -17,7 +25,8 @@ const SideBarform = () => {
         <input type="text" placeholder='enter destination' />
         <br />
         <br />
-        <button className='button'>Search</button>
+        <button onClick={handleRide} className='button'>Search For Cars</button>
+        {ride?<Car />:null}
 
         </form>
     </div>

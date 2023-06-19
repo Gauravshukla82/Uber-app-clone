@@ -16,6 +16,7 @@ import axios from "axios";
 const initState = {
   email: "",
   password: "",
+  name:"" 
 };
 export const Login = () => {
   const [user, setUser] = useState(initState);
@@ -42,6 +43,7 @@ export const Login = () => {
       .catch((err) => {
         console.log(err);
       });
+      localStorage.setItem("emaill", JSON.stringify(user) );
   };
 
   const { email, password } = user;

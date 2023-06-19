@@ -37,7 +37,7 @@ userRouter.post("/register", async (req, res) => {
 });
 
 userRouter.post("/login", async (req, res) => {
-  const { email, password,name } = req.body;
+  const {name, email, password } = req.body;
   const existedUser = await UserModel.findOne({ email });
   try {
     if (existedUser) {
@@ -46,7 +46,8 @@ userRouter.post("/login", async (req, res) => {
           const token = jwt.sign({ data: "data" }, process.env.secret);
           res
             .status(200)
-            .json({ msg: "You are successfully Logged In!!", token: token , new_mesg:"hello"});
+            .json({ msg: "You are successfully Logged In!!", token: token, email:email , name:name});
+            
         } else {
           res.status(400).json({ msg: "You are not authorized" });
         }
@@ -59,7 +60,21 @@ userRouter.post("/login", async (req, res) => {
   }
 });
 
-// hello
+
+// we ll need a get users detials route too  
+//tp 
+userRouter.get("/userdetails", async (req, res) => {
+  try {
+    const users = await UserModel.find();
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(400).json({ error: "Failed to fetch users" });
+  }
+});
+
+
+
+
 
 module.exports = {
   userRouter,
