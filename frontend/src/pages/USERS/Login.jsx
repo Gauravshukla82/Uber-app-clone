@@ -38,10 +38,10 @@ export const Login = () => {
       .then((res) => {
         console.log(res.data.email);
         console.log(res.data.name);
-        localStorage.setItem('username', JSON.stringify(res.data.name))
+        localStorage.setItem('username', JSON.stringify(res.data.email.split("@")[0]))
         alert("login successfull")
         navigate("/")
-        
+        window.location.reload(false);
         setUser(initState);
 
       })

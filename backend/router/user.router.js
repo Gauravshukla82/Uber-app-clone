@@ -27,13 +27,13 @@ userRouter.post("/register", async (req, res) => {
             password: hash,
           });
           await newUser.save();
-          // res.status(200).json({ msg: "new user has been added" });
-          const token = jwt.sign({ userID: users._id }, process.env.secret);
-        res.json({
-          msg: "Driver has been registered",
-          driver: req.body,
-          token,
-        });
+          res.status(200).json({ msg: "new user has been added" });
+        //   const token = jwt.sign({ userID: users._id }, process.env.secret);
+        // res.json({
+        //   msg: "Driver has been registered",
+        //   driver: req.body,
+        //   token,
+        // });
         }
       });
     }
