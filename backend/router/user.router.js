@@ -37,7 +37,7 @@ userRouter.post("/register", async (req, res) => {
 });
 
 userRouter.post("/login", async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password,name } = req.body;
   const existedUser = await UserModel.findOne({ email });
   try {
     if (existedUser) {
@@ -46,7 +46,7 @@ userRouter.post("/login", async (req, res) => {
           const token = jwt.sign({ data: "data" }, process.env.secret);
           res
             .status(200)
-            .json({ msg: "You are successfully Logged In!!", token: token });
+            .json({ msg: "You are successfully Logged In!!", token: token , new_mesg:"hello"});
         } else {
           res.status(400).json({ msg: "You are not authorized" });
         }
@@ -58,6 +58,8 @@ userRouter.post("/login", async (req, res) => {
     res.status(400).json({ error: err.message });
   }
 });
+
+// hello
 
 module.exports = {
   userRouter,
