@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const data = [
   {
@@ -26,6 +27,8 @@ const Car = ({ distance,origin,destination }) => {
   let x = distance.replace(/,/g, "");
   var distanceNumber = parseFloat(distance.replace(/,/g, ""));
 
+  const navigate = useNavigate()
+
   const handleClick = (el, e) => {
     e.preventDefault();
     let mul = el.multiplier;
@@ -38,7 +41,7 @@ const Car = ({ distance,origin,destination }) => {
       destination,
       mul,userEmail,userName
     }
-  
+   navigate("/payment")
     localStorage.setItem("userDetails", JSON.stringify(obj))
     // console.log(loggedInUser.email,userName);
     // console.log(el.multiplier * distanceNumber);

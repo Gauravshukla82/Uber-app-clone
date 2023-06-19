@@ -21,12 +21,24 @@ import {
   } from '@chakra-ui/react'
 
   import React from 'react'
+import { useNavigate } from 'react-router-dom'
   
   const  Payment = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const navigate = useNavigate()
+
+    const handleClick = ()=>
+    {
+      navigate("/thankyoupage")
+      setTimeout(() => {
+        navigate("/")
+      },3000);
+
+    }
     return (
       <>
-        <Button onClick={onOpen}>Open Modal</Button>
+      <h1 style={{textAlign:"center",margin:"1%"}}>Click here for Payment <Button onClick={onOpen} bg='black' colorScheme='white'>Proceed</Button></h1>
+        
   
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
@@ -145,7 +157,7 @@ import {
               <Button colorScheme='blue' mr={3} onClick={onClose} style={{backgroundColor:"black",color:"white"}}>
                 Close
               </Button>
-              <Button variant='ghost' style={{backgroundColor:"black",color:"white"}} >Payment</Button>
+              <Button variant='ghost' style={{backgroundColor:"black",color:"white"}} onClick={handleClick}>Payment</Button>
             </ModalFooter>
           </ModalContent>
         </Modal>

@@ -9,6 +9,7 @@ import { Register } from "./USERS/Register";
 import Payment from "../components/Payment/Payment";
 import DriverLogin from "../components/driver/DriverLogin";
 import DriverDashboard from "../components/driver/DriverDashboard";
+import ThankyouPage from "./ThankyouPage";
 
 
 const MainRoutesPage = () => {
@@ -24,6 +25,10 @@ const MainRoutesPage = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/driverdashboard" element={<DriverDashboard />} />
+        <Route path="/thankyoupage" element={<ThankyouPage />} />
+        <Route path="*" element={<h1>Page not found</h1>} />
+        
+
       </Routes>
     </div>
   );
