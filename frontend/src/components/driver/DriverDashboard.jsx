@@ -10,6 +10,7 @@ import {
   Grid,
   VStack,
   Button,
+  Spacer,
 } from "@chakra-ui/react";
 
 import DriverPageFooter from "./DriverPageFooter";
@@ -52,10 +53,24 @@ const DriverDashboard = () => {
 
   const handleAccept = () => {
     setAccept(!accept);
+    toast({
+      title: "User Waiting",
+      description: "The user is waiting at the location.",
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+    });
   };
   const handleReject = () => {
     setReject(!reject);
-    localStorage.removeItem("userDetails")
+    localStorage.removeItem("userDetails");
+    toast({
+      title: "Ride Request Rejected",
+      description: "Some Amount will be deducted from your earnings.",
+      status: "warning",
+      duration: 5000,
+      isClosable: true,
+    });
   };
 
   return (
@@ -118,22 +133,39 @@ const DriverDashboard = () => {
             "https://www.researchgate.net/publication/323759986/figure/fig3/AS:631576123682823@1527590890164/Map-in-Uber-application-tracking-user-in-a-Yellow-Cab.png"
           }
         >
-          <Heading bg="green.200" size="md">
-            driver trips will show here and he can accept or reject
+          <Heading bg="green.200" size="md" textAlign={"center"}>
+            {driverData ? (
+              <span>Your Trips are here</span>
+            ) : (
+              <span>No Trips available</span>
+            )}
           </Heading>
           {reject ? null : (
-            <Box>
+            <Box
+              textAlign={"center"}
+              justifyContent={"center"}
+              bg="white"
+              width={"30%"}
+              m="5% 35%"
+              fontWeight={"bold"}
+              gap={6}
+              p={7}
+            >
               <Text>Name : {userData?.userName}</Text>
               <Text>Email : {userData?.userEmail}</Text>
-              <Text>Origin Location : {userData?.origin}</Text>
+              <Text bg="white">Origin Location : {userData?.origin}</Text>{" "}
               <Text>Destination Location : {userData?.destination}</Text>
-              <Text>Fare : {Math.ceil(userData?.distanceNumber * userData?.mul)}</Text>
-              <Button colorScheme="green" onClick={handleAccept}>
+              <Text>
+                Fare : {Math.ceil(userData?.distanceNumber * userData?.mul)}
+              </Text>
+              <Button colorScheme="green" onClick={handleAccept} mr={5}>
                 {accept ? "User is waiting" : "Accept"}
               </Button>
-              {accept?null:<Button colorScheme="red" onClick={handleReject}>
-                Reject
-              </Button>}
+              {accept ? null : (
+                <Button colorScheme="red" onClick={handleReject}>
+                  Reject
+                </Button>
+              )}
             </Box>
           )}
         </Box>
