@@ -34,7 +34,7 @@ export const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(`https://dull-erin-iguana-belt.cyclic.app/users/login`, user)
+      .post(`https://uber-u41r.onrender.com/users/login`, user)
       .then((res) => {
         console.log(res.data.email);
         console.log(res.data.name);
