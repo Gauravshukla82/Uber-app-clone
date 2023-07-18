@@ -125,7 +125,7 @@ function Map() {
         p={4}
         position="absolute"
         left={-460}
-        top={-25}
+        top={-31}
         borderRadius="lg"
         m={4}
         bgColor="white"
@@ -233,8 +233,8 @@ function Map() {
               map.setZoom(15);
             }}
           />
-          <button onClick={handleDriverArrival}>Notify Driver Arrival</button>
         </HStack>
+          <Button onClick={handleDriverArrival}>Notify Driver Arrival</Button>
       </Box>
     </Flex>
   );
